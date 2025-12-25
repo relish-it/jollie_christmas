@@ -11,7 +11,7 @@
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
-        padding: 0 20px; /* Adds a little "breathing room" on the sides */
+        padding: 0;
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -19,54 +19,75 @@
         overflow: hidden;
     }
 
+    /* This container forces the trees and text to stay in a row */
+    .title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        white-space: nowrap; /* This is the magic command that prevents wrapping */
+    }
+
     h1 {
-        /* This tells the text to be 10% of the screen width, 
-           but never smaller than 32px or larger than 64px */
-        font-size: clamp(32px, 10vw, 64px); 
-        line-height: 1.2;
-        margin-bottom: 10px;
+        /* This scales the text fluidly based on screen width */
+        font-size: clamp(20px, 6vw, 64px);
+        line-height: 1;
+        margin: 0 10px; /* Space between text and trees */
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         z-index: 10;
     }
 
-    p {
-        font-size: clamp(18px, 4vw, 24px);
+    .tree {
+        /* The trees will scale down with the text */
+        font-size: clamp(20px, 6vw, 64px);
         z-index: 10;
     }
 
-        /* Snowflake styling */
-        .snowflake {
-            color: #fff;
-            font-size: 1em;
-            font-family: Arial;
-            text-shadow: 0 0 1px #000;
-            position: fixed;
-            top: -10%;
-            z-index: 9999;
-            user-select: none;
-            cursor: default;
-            animation-name: snowflakes-fall, snowflakes-shake;
-            animation-duration: 10s, 3s;
-            animation-timing-function: linear, ease-in-out;
-            animation-iteration-count: infinite, infinite;
-            animation-play-state: running, running;
-        }
+    p {
+        font-size: clamp(16px, 4vw, 24px);
+        margin-top: 15px;
+        z-index: 10;
+    }
 
-        @keyframes snowflakes-fall {
-            0% { top: -10%; }
-            100% { top: 100%; }
-        }
+    /* Snowflake styling */
+    .snowflake {
+        color: #fff;
+        font-size: 1em;
+        font-family: Arial;
+        text-shadow: 0 0 1px #000;
+        position: fixed;
+        top: -10%;
+        z-index: 9999;
+        user-select: none;
+        cursor: default;
+        animation-name: snowflakes-fall, snowflakes-shake;
+        animation-duration: 10s, 3s;
+        animation-timing-function: linear, ease-in-out;
+        animation-iteration-count: infinite, infinite;
+        animation-play-state: running, running;
+    }
 
-        @keyframes snowflakes-shake {
-            0% { transform: translateX(0px); }
-            50% { transform: translateX(80px); }
-            100% { transform: translateX(0px); }
-        }
+    @keyframes snowflakes-fall {
+        0% { top: -10%; }
+        100% { top: 100%; }
+    }
+
+    @keyframes snowflakes-shake {
+        0% { transform: translateX(0px); }
+        50% { transform: translateX(80px); }
+        100% { transform: translateX(0px); }
+    }
     </style>
 </head>
 <body>
 
-    <h1>🎄 Merry Christmas! 🎄</h1>
+    <div class="title-container">
+        <span class="tree">🎄</span>
+        <h1>Merry Christmas!</h1>
+        <span class="tree">🎄</span>
+    </div>
+    
     <p>Love, John</p>
 
     <div id="snow-container"></div>
@@ -79,19 +100,17 @@
             
             // Randomize position and speed
             snow.style.left = Math.random() * 100 + 'vw';
-            snow.style.animationDuration = Math.random() * 3 + 7 + 's'; // between 7-10s
+            snow.style.animationDuration = Math.random() * 3 + 7 + 's'; 
             snow.style.opacity = Math.random();
             snow.style.fontSize = Math.random() * 10 + 10 + 'px';
 
             document.getElementById('snow-container').appendChild(snow);
 
-            // Remove snowflake after it falls to keep the site fast
             setTimeout(() => {
                 snow.remove();
             }, 10000);
         }
 
-        // Create a new snowflake every 200ms
         setInterval(createSnowflake, 200);
     </script>
 </body>
