@@ -5,30 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Gift</title>
     <style>
-        body {
-            background-color: #d42426; /* Festive Red */
-            color: white;
-            text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden; /* Prevents scrollbars from the snow */
-        }
+    body {
+        background-color: #d42426;
+        color: white;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0 20px; /* Adds a little "breathing room" on the sides */
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+    }
 
-        h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            z-index: 10;
-        }
+    h1 {
+        /* This tells the text to be 10% of the screen width, 
+           but never smaller than 32px or larger than 64px */
+        font-size: clamp(32px, 10vw, 64px); 
+        line-height: 1.2;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
 
-        p {
-            font-size: 1.5rem;
-            z-index: 10;
-        }
+    p {
+        font-size: clamp(18px, 4vw, 24px);
+        z-index: 10;
+    }
 
         /* Snowflake styling */
         .snowflake {
